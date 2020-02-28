@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Index</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'expense/bootstrap.min.css' %}">
+</head>
+<body>
+    
+        <div class="container-fluid">
+          <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">Expense tracker</a>
+          </nav>
+            <div class="row">
+              <div class="col">
+                <div class="container">
+                </br>
+                    <table class="table table-striped">
+                        
+                        <tbody>
+                          
+                          <tr>
+                            <form action="/" method="post">
+                              {% csrf_token %}
+                              {{ form }}
+                                         <td><input type="text" name="spent_on" placeholder="spent on" maxlength="100" minlength="2" required></td>
+                                          <td><input type="text" name="reason" placeholder="reason of spent" maxlength="100" minlength="2" required></td>
+                                         <td><input type="number" name="amount" placeholder="amount" maxlength="5" required ></td>
+                                         <td><input type="submit" value="Add"></td></form></tr>
+                            {% for choice in latest_question_list %}
+                          <tr>
+                            <td>{{ choice.spent_on }}</td>
+                            <td>{{ choice.reason }}</td>
+                            <td>{{ choice.amount }}</td>
+                            <td>{{ choice.date }} <button type="button" class="close" aria-label="Close">
+                              <a href="{% url 'expense:index_two' choice.id%}"><span aria-hidden="true">&times;</span></a>
+                            </button>
+                              </td>
+                            
+                          </tr>
+                          
+                          {% endfor %}
+                        
+                        </tbody>
+                      </table></div>
+              </div>
+            
+              <div class="col-3">
+                <div class="container">
+                </br><div class="card" style="width: 18rem;">
+              
+                <div class="card-header">
+                  Highlights
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Total items = {{latest_question_list|length}}</li>
+                  <li class="list-group-item">Total spent = {{ amount_sum }}</li>
+                  
+                </ul>
+              </div></div></div>
+             
+            </div>
+          </div>
+    
+    
+    
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   </body>
+</html>
