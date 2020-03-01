@@ -1,5 +1,5 @@
 # Expense Tracker 
 ## Index page
-![img](/images/a.png)
+![img](/images/b.png)
 
 
