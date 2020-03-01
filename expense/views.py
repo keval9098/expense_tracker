@@ -49,4 +49,15 @@ def signup(request):
         return redirect('/')   
     else:
         return render(request, 'expense/signup.html')
-    
+def search(request):
+    if request.method=='POST':
+        text=request.POST.get('search')
+        search = spent.objects.all().filter(spent_on=text)
+        amount_sum=spent.objects.all().filter(spent_on=text).aggregate(Sum('amount')).get('amount__sum', 0.00)
+        template = loader.get_template('expense/index.html')
+        context = {
+            'latest_question_list': search,
+            'amount_sum': amount_sum,
+        }
+        
+        return HttpResponse(template.render(context, request))

@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:question_id>/', views.new_index, name='index_two'),
     path('signup', views.signup, name='signup'),
+    path('search', views.search, name='search'),
 ]

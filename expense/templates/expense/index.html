@@ -8,18 +8,30 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     
     <link rel="stylesheet" type="text/css" href="{% static 'expense/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'expense/style.css' %}">
+    <script type="javascript">
+      $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    });
+    </script>
 </head>
 <body>
     
         <div class="container-fluid">
-          <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">Expense tracker</a>
+          <nav class="navbar  navbar-light bg-light">
+            <a class="navbar-brand" href="/">Expense tracker</a>
+            <form class="form-inline" action="/search" method="POST">
+              {% csrf_token %}
+              <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
           </nav>
             <div class="row">
               <div class="col">
                 <div class="container">
                 </br>
-                    <table class="table table-striped">
+                    <table class="table table-striped table-bordered">
                         
                         <tbody>
                           
@@ -36,7 +48,7 @@
                             <td>{{ choice.spent_on }}</td>
                             <td>{{ choice.reason }}</td>
                             <td>{{ choice.amount }}</td>
-                            <td>{{ choice.date }} <button type="button" class="close" aria-label="Close">
+                            <td>{{ choice.date|date }} <button type="button" class="close" aria-label="Close">
                               <a href="{% url 'expense:index_two' choice.id%}"><span aria-hidden="true">&times;</span></a>
                             </button>
                               </td>
@@ -59,11 +71,16 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Total items = {{latest_question_list|length}}</li>
                   <li class="list-group-item">Total spent = {{ amount_sum }}</li>
+            
+
                   
                 </ul>
               </div></div></div>
              
             </div>
+
+            
+          </div>
           </div>
     
     
