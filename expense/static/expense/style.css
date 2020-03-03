@@ -7,7 +7,10 @@ body {
 
 }
 .card{
-    background-color: #f1f7e8;}
+    background-color: rgb(247, 215, 175);}
 .navbar{
     background-color: lavenderblush;
+}
+.thead{
+    background-color: rgb(247, 215, 175);
 }
