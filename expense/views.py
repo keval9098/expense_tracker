@@ -7,6 +7,8 @@ from .forms import Add_form
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 
@@ -58,6 +60,11 @@ def signup(request):
 
         user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name, email=email)
         user.save()
+        """  subject="hey " + first_name + " this is email sent from django"
+        message="Hey yah!!!!"
+        email_from=settings.EMAIL_HOST_USER
+        recipient_list=['gffsg@gmail.com']
+        send_mail(subject, message, email_from, recipient_list)"""
         return redirect('/login')
     else:
 
@@ -95,3 +102,4 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/login')
+
