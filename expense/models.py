@@ -10,4 +10,5 @@ class spent(models.Model):
     amount=models.IntegerField(default=0)
     reason=models.CharField(max_length=200)
     date=models.DateTimeField(default=datetime.datetime.now()) 
+    
 

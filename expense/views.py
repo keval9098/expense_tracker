@@ -9,6 +9,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
 from django.conf import settings
+from rest_framework import viewsets, permissions
+from . serializers import Spent_serializer, User_serializer
 # Create your views here.
 
 
@@ -103,3 +105,17 @@ def logout(request):
     auth.logout(request)
     return redirect('/login')
 
+class SpentViewSet(viewsets.ModelViewSet):
+    queryset=spent.objects.all().filter(user_name='9')
+    serializer_class=Spent_serializer
+    permission_classes=(
+        permissions.IsAuthenticatedOrReadOnly,
+        )
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset=User.objects.all()
+    serializer_class=User_serializer
+    permission_classes=(
+        permissions.IsAuthenticatedOrReadOnly,
+        )
